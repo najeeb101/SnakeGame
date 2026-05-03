@@ -1,0 +1,18 @@
+{
+  "name": "Snake Game",
+  "short_name": "Snake",
+  "description": "A polished HTML5 canvas snake game built with vanilla JavaScript.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#07111a",
+  "theme_color": "#84cc16",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

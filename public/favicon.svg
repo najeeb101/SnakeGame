@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Snake Game">
+  <defs>
+    <linearGradient id="bg" x1="16" y1="12" x2="112" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07111a" />
+      <stop offset="1" stop-color="#10251b" />
+    </linearGradient>
+    <linearGradient id="snake" x1="24" y1="24" x2="100" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d9f99d" />
+      <stop offset="0.45" stop-color="#84cc16" />
+      <stop offset="1" stop-color="#22c55e" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#bg)" />
+  <path d="M28 88C28 67 44 56 59 56C75 56 86 67 86 79C86 91 75 100 63 100H50" fill="none" stroke="url(#snake)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M59 56C72 56 82 46 82 34" fill="none" stroke="url(#snake)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="84" cy="34" r="12" fill="#84cc16" />
+  <circle cx="79" cy="31" r="3.5" fill="#07111a" />
+  <circle cx="22" cy="22" r="4" fill="#fde047" opacity="0.9" />
+</svg>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Snake Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+        canvas {
+            border: 3px solid #4a5568;
+            border-radius: 10px;
+            background: #1a202c;
+            display: block;
+            margin: 20px auto;
+        }
+        .debug-info {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            text-align: left;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #48bb78;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #38a169;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Debug Snake Game</h1>
+        <div class="debug-info" id="debugInfo">Loading...</div>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <div>
+            <button onclick="initGame()">Initialize Game</button>
+            <button onclick="testDraw()">Test Drawing</button>
+            <button onclick="clearCanvas()">Clear Canvas</button>
+        </div>
+    </div>
+
+    <script>
+        let canvas, ctx, debugInfo;
+        
+        function log(message) {
+            console.log(message);
+            if (debugInfo) {
+                debugInfo.innerHTML += message + '<br>';
+            }
+        }
+        
+        function initGame() {
+            debugInfo = document.getElementById('debugInfo');
+            debugInfo.innerHTML = '';
+            
+            log('Initializing game...');
+            
+            canvas = document.getElementById('gameCanvas');
+            if (!canvas) {
+                log('ERROR: Canvas element not found!');
+                return;
+            }
+            log('Canvas element found: ' + canvas.id);
+            
+            try {
+                ctx = canvas.getContext('2d');
+                if (!ctx) {
+                    log('ERROR: Unable to get 2D context!');
+                    return;
+                }
+                log('2D context obtained successfully');
+                
+                log('Canvas dimensions: ' + canvas.width + 'x' + canvas.height);
+                
+                // Test basic drawing
+                testDraw();
+                
+            } catch (error) {
+                log('ERROR getting context: ' + error.message);
+            }
+        }
+        
+        function testDraw() {
+            if (!ctx) {
+                log('ERROR: No context available');
+                return;
+            }
+            
+            try {
+                // Clear with bright color
+                ctx.fillStyle = '#ff0000';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                log('Filled background with red');
+                
+                // Draw white rectangle
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(50, 50, 100, 100);
+                log('Drew white rectangle');
+                
+                // Draw text
+                ctx.fillStyle = '#000000';
+                ctx.font = '20px Arial';
+                ctx.fillText('Canvas is working!', 60, 120);
+                log('Drew text');
+                
+                // Draw grid
+                ctx.strokeStyle = '#ffff00';
+                ctx.lineWidth = 1;
+                for (let i = 0; i <= 20; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(i * 20, 0);
+                    ctx.lineTo(i * 20, canvas.height);
+                    ctx.stroke();
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(0, i * 20);
+                    ctx.lineTo(canvas.width, i * 20);
+                    ctx.stroke();
+                }
+                log('Drew grid');
+                
+            } catch (error) {
+                log('ERROR drawing: ' + error.message);
+            }
+        }
+        
+        function clearCanvas() {
+            if (!ctx) {
+                log('ERROR: No context available');
+                return;
+            }
+            
+            ctx.fillStyle = '#1a202c';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            log('Cleared canvas');
+        }
+        
+        // Auto-initialize when page loads
+        window.addEventListener('load', function() {
+            log('Page loaded, auto-initializing...');
+            setTimeout(initGame, 100); // Small delay to ensure everything is ready
+        });
+        
+        // Also try immediate initialization
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initGame);
+        } else {
+            // DOM is already loaded
+            initGame();
+        }
+    </script>
+</body>
+</html>

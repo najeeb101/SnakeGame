@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Test</title>
+    <style>
+        body { 
+            background: white; 
+            margin: 20px; 
+            font-family: Arial, sans-serif; 
+        }
+        canvas { 
+            border: 2px solid black; 
+            background: yellow; 
+            display: block; 
+            margin: 20px 0; 
+        }
+        .status { 
+            color: green; 
+            font-weight: bold; 
+            margin: 10px 0; 
+        }
+        .error { 
+            color: red; 
+            font-weight: bold; 
+            margin: 10px 0; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Basic Canvas Test</h1>
+    <div id="status">Loading...</div>
+    <canvas id="testCanvas" width="300" height="200"></canvas>
+    <div id="debug"></div>
+    
+    <script>
+        try {
+            const canvas = document.getElementById('testCanvas');
+            const ctx = canvas.getContext('2d');
+            const status = document.getElementById('status');
+            const debug = document.getElementById('debug');
+            
+            // Basic canvas info
+            debug.innerHTML = `
+                <p>Canvas width: ${canvas.width}</p>
+                <p>Canvas height: ${canvas.height}</p>
+                <p>Context type: ${ctx ? '2d' : 'null'}</p>
+            `;
+            
+            // Test drawing
+            ctx.fillStyle = 'red';
+            ctx.fillRect(10, 10, 50, 50);
+            
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(70, 10, 50, 50);
+            
+            ctx.fillStyle = 'green';
+            ctx.font = '20px Arial';
+            ctx.fillText('Canvas is working!', 10, 100);
+            
+            // Draw a circle
+            ctx.beginPath();
+            ctx.arc(200, 50, 30, 0, 2 * Math.PI);
+            ctx.fillStyle = 'purple';
+            ctx.fill();
+            
+            status.textContent = '✅ Canvas loaded and working!';
+            status.className = 'status';
+            
+        } catch (error) {
+            document.getElementById('status').textContent = '❌ Error: ' + error.message;
+            document.getElementById('status').className = 'error';
+            console.error('Canvas error:', error);
+        }
+    </script>
+</body>
+</html>

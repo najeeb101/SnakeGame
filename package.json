@@ -1,0 +1,24 @@
+{
+  "name": "snake-game",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A polished, deploy-ready Snake game built with HTML5 Canvas and vanilla JavaScript.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "check": "node --check public/script.js && node --check server.js"
+  },
+  "keywords": [
+    "snake",
+    "game",
+    "canvas",
+    "javascript",
+    "deploy"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
