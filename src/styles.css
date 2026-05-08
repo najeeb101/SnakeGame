@@ -1,0 +1,553 @@
+:root {
+  --bg: #07080d;
+  --ink: #f6f8ff;
+  --muted: #9aa6bd;
+  --panel: rgba(14, 18, 28, 0.88);
+  --panel-2: rgba(22, 27, 39, 0.92);
+  --line: rgba(255, 255, 255, 0.1);
+  --line-hot: rgba(110, 231, 255, 0.42);
+  --green: #9dff57;
+  --cyan: #6ee7ff;
+  --pink: #ff5bd6;
+  --orange: #ffb84d;
+  --red: #ff6178;
+  color: var(--ink);
+  background: var(--bg);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100svh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(110, 231, 255, 0.16), transparent 34%),
+    radial-gradient(circle at 90% 18%, rgba(255, 91, 214, 0.13), transparent 26%),
+    linear-gradient(180deg, #0d101b 0%, #07080d 48%, #05060a 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: linear-gradient(180deg, black, transparent 80%);
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+.app {
+  position: relative;
+  width: min(1280px, calc(100vw - 22px));
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 12px 0 18px;
+}
+
+.arcade-layout {
+  display: grid;
+  grid-template-columns: 230px minmax(420px, 720px) 250px;
+  gap: 14px;
+  align-items: start;
+  justify-content: center;
+}
+
+.panel,
+.game-stage {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(24, 29, 44, 0.9), rgba(9, 11, 18, 0.96));
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+}
+
+.panel {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 22px;
+  max-height: calc(100svh - 24px);
+  overflow: auto;
+}
+
+.game-stage {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  padding: 14px;
+  border-radius: 28px;
+  border-color: rgba(110, 231, 255, 0.2);
+  background:
+    linear-gradient(180deg, rgba(32, 39, 58, 0.88), rgba(10, 11, 18, 0.98)),
+    radial-gradient(circle at 50% 0%, rgba(110, 231, 255, 0.12), transparent 42%);
+}
+
+.game-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0 18px auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(110, 231, 255, 0.7), transparent);
+}
+
+.stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.brand-lockup,
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  color: #061105;
+  background:
+    linear-gradient(135deg, var(--green), #20d86b),
+    radial-gradient(circle at 30% 20%, white, transparent 38%);
+  box-shadow: 0 10px 28px rgba(157, 255, 87, 0.24);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+  line-height: 0.95;
+}
+
+.panel-heading h2,
+.overlay-card h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--cyan);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.icon-button,
+.status-badge,
+.primary-action,
+.secondary-action,
+.difficulty-grid button,
+.pad-button {
+  min-height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  color: var(--ink);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition:
+    transform 0.16s ease,
+    border-color 0.16s ease,
+    background 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(110, 231, 255, 0.42);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+}
+
+.icon-button,
+.status-badge {
+  padding: 0 12px;
+}
+
+.status-badge {
+  display: grid;
+  place-items: center;
+  min-width: 98px;
+  color: var(--green);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+}
+
+.status-badge[data-state="gameover"] {
+  color: var(--red);
+}
+
+.difficulty-grid,
+.action-stack,
+.mission-list,
+.boost-list,
+.records {
+  display: grid;
+  gap: 8px;
+}
+
+.difficulty-grid button {
+  position: relative;
+  justify-content: space-between;
+  padding: 0 12px;
+  text-align: left;
+}
+
+.difficulty-grid button.selected {
+  border-color: rgba(157, 255, 87, 0.5);
+  color: white;
+  background: linear-gradient(135deg, rgba(157, 255, 87, 0.18), rgba(110, 231, 255, 0.09));
+}
+
+.primary-action {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 14px;
+  border-color: rgba(157, 255, 87, 0.66);
+  color: #061105;
+  background: linear-gradient(135deg, var(--green), #24e173);
+}
+
+.secondary-action {
+  width: 100%;
+  padding: 0 14px;
+}
+
+.secondary-action.danger {
+  color: #ffd4db;
+  border-color: rgba(255, 97, 120, 0.34);
+}
+
+.secondary-action:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.message-card,
+.empty-state {
+  margin: 0;
+  padding: 11px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.045);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.message-card span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--orange);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hud {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.stat {
+  min-height: 64px;
+  padding: 10px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.028)),
+    radial-gradient(circle at 85% 15%, rgba(110, 231, 255, 0.1), transparent 42%);
+}
+
+.stat.highlight {
+  border-color: rgba(157, 255, 87, 0.34);
+}
+
+.stat span {
+  display: block;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.61rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.stat strong {
+  display: block;
+  margin-top: 7px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(1.05rem, 2vw, 1.55rem);
+  line-height: 1;
+}
+
+.canvas-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: min(560px, calc(100svh - 220px));
+  min-width: 320px;
+  justify-self: center;
+  padding: 36px 10px 10px;
+  border: 1px solid rgba(110, 231, 255, 0.28);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(4, 7, 15, 0.98), rgba(4, 5, 10, 0.98)),
+    radial-gradient(circle at 50% 0%, rgba(110, 231, 255, 0.2), transparent 50%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 0 40px rgba(110, 231, 255, 0.05),
+    0 18px 42px rgba(0, 0, 0, 0.34);
+}
+
+.cabinet-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border-bottom: 1px solid rgba(110, 231, 255, 0.14);
+  color: var(--muted);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+}
+
+.cabinet-strip strong {
+  color: var(--green);
+}
+
+.cabinet-strip span:last-child {
+  text-align: right;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  touch-action: none;
+}
+
+.game-overlay {
+  position: absolute;
+  inset: 36px 10px 10px;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(3, 5, 12, 0.58);
+}
+
+.overlay-card {
+  width: min(340px, 100%);
+  padding: 17px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 18px;
+  background: rgba(13, 17, 28, 0.92);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.34);
+  text-align: center;
+}
+
+.overlay-card h2 {
+  font-size: 1.25rem;
+}
+
+.overlay-card p:not(.eyebrow) {
+  margin: 8px 0 14px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.mobile-pad {
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    ". up ."
+    "left . right"
+    ". down .";
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.pad-up {
+  grid-area: up;
+}
+
+.pad-left {
+  grid-area: left;
+}
+
+.pad-right {
+  grid-area: right;
+}
+
+.pad-down {
+  grid-area: down;
+}
+
+.mission-card,
+.boost-chip {
+  padding: 11px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.045);
+  font-size: 0.84rem;
+}
+
+.mission-card[data-complete="true"] {
+  border-color: rgba(157, 255, 87, 0.4);
+  background: rgba(157, 255, 87, 0.1);
+}
+
+.mission-card span,
+.boost-chip span {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.mission-card strong,
+.boost-chip strong {
+  float: right;
+  color: var(--cyan);
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.mission-card div {
+  height: 5px;
+  margin-top: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mission-card i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+}
+
+.records .stat {
+  min-height: 56px;
+}
+
+@media (max-width: 1120px) {
+  .arcade-layout {
+    grid-template-columns: minmax(0, 760px);
+  }
+
+  .game-stage {
+    order: 1;
+  }
+
+  .menu-panel {
+    order: 2;
+  }
+
+  .side-panel {
+    order: 3;
+  }
+
+  .panel {
+    max-height: none;
+  }
+
+  .difficulty-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .canvas-wrap {
+    max-width: min(560px, calc(100svh - 230px));
+  }
+}
+
+@media (max-width: 680px) {
+  .app {
+    width: min(100vw - 14px, 1280px);
+    padding-top: 8px;
+  }
+
+  .stage-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .topbar-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hud {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .difficulty-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-pad {
+    display: grid;
+  }
+
+  .panel,
+  .game-stage {
+    border-radius: 18px;
+    padding: 10px;
+  }
+
+  .canvas-wrap {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 34px 8px 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

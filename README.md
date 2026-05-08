@@ -1,48 +1,45 @@
-# Snake Game
+# Snake Arcade
 
-A polished, deploy-ready Snake game built with HTML5 Canvas and vanilla JavaScript.
+A premium arcade Snake game built with Vite, React, TypeScript, Framer Motion, and HTML5 Canvas.
 
 ## Features
 
-- Responsive layout with a modern arcade-style presentation
-- Keyboard, touch, and on-screen controls
-- Difficulty modes with adaptive speed
-- Local high score persistence in the browser
-- Lightweight Node server for local development and deployment
-- PWA manifest and favicon assets
+- Canvas-based Snake gameplay with responsive keyboard, WASD, swipe, and on-screen controls
+- React UI with animated menus, HUD cards, mission progress, overlays, and run summaries
+- Arcade progression with combo scoring, power-ups, obstacle waves, and rotating missions
+- Local persistence for best score, best level, best combo, mission totals, difficulty, and sound preference
+- Static deploy setup for Vercel and Netlify
 
-## Run locally
+## Run Locally
 
 ```bash
+npm install
 npm start
 ```
 
-Then open `http://localhost:3000`.
+Open the URL printed by Vite, usually `http://localhost:3002`.
 
-If you are running inside VS Code and `localhost:3000` is already taken by the editor preview, use the port printed in the terminal. By default this project now starts on `http://localhost:3002`.
+## Commands
 
-## Controls
-
-- Arrow keys or WASD to move
-- Space to pause or resume
-- Enter to start, resume, or restart
-- R to reset
-- Touch swipe or use the on-screen pad on mobile
+```bash
+npm start        # Start local app on http://localhost:3002
+npm run dev      # Start Vite dev server
+npm run check    # Type-check the React/TypeScript app
+npm run build    # Type-check and create dist/
+npm run preview  # Preview the production build
+```
 
 ## Deployment
 
-This project is ready for Node-based hosts such as Render, Railway, Fly.io, or Heroku-style environments.
+The app is static-first.
 
-- Start command: `npm start`
-- Node version: 18 or newer
+- Vercel: uses `vercel.json`, builds with `npm run build`, outputs `dist/`.
+- Netlify: uses `netlify.toml`, builds with `npm run build`, publishes `dist/`.
 
-## Project structure
+## Project Structure
 
-- `public/` - live app files served by the Node server
-- `public/index.html` - game UI and layout
-- `public/style.css` - visual design and responsive styling
-- `public/script.js` - game logic and rendering
-- `public/manifest.json` - app manifest for installable behavior
-- `public/favicon.svg` - icon asset
-- `legacy/` - archived prototype pages kept out of the deploy path
-- `server.js` - lightweight static file server
+- `src/` - React app, TypeScript game engine, styles, and UI
+- `src/gameEngine.ts` - Canvas gameplay, state, scoring, missions, particles, and persistence hooks
+- `public/` - static assets copied by Vite, including manifest and favicon
+- `index.html` - Vite HTML entry
+- `legacy/` - archived prototypes kept out of the app path

@@ -1,12 +1,12 @@
 {
-  "name": "Snake Game",
-  "short_name": "Snake",
-  "description": "A polished HTML5 canvas snake game built with vanilla JavaScript.",
+  "name": "Snake Arcade",
+  "short_name": "Snake Arcade",
+  "description": "A premium arcade Snake game with combos, missions, power-ups, and animated React UI.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#07111a",
-  "theme_color": "#84cc16",
+  "background_color": "#050514",
+  "theme_color": "#67e8f9",
   "icons": [
     {
       "src": "favicon.svg",
