@@ -1,4 +1,4 @@
-export type GameStatus = "menu" | "running" | "paused" | "gameover";
+export type GameStatus = "menu" | "countdown" | "running" | "paused" | "gameover";
 export type Direction = "up" | "down" | "left" | "right";
 export type Difficulty = "chill" | "classic" | "arcade";
 export type PowerUpType = "slow" | "doubleScore" | "shield";
@@ -42,4 +42,5 @@ export type GameSnapshot = PersistedStats & {
   missions: Mission[];
   activePowerUps: ActivePowerUp[];
   message: string;
+  countdown: number;
 };

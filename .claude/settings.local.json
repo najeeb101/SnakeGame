@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\ACER\\\\Documents\\\\GitHub\\\\SnakeGame\" -Force)",
-      "Bash(Select-Object Name, PSIsContainer)"
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(npm run *)",
+      "Bash(Remove-Item \"C:\\\\Users\\\\ACER\\\\Documents\\\\GitHub\\\\SnakeGame\\\\src\\\\App.tsx\" -Force)",
+      "Bash(Remove-Item \"C:\\\\Users\\\\ACER\\\\Documents\\\\GitHub\\\\SnakeGame\\\\src\\\\gameEngine.ts\" -Force)",
+      "Bash(npx eslint *)",
+      "Bash(npx biome *)",
+      "Bash(npx tsc *)"
     ]
   }
 }
