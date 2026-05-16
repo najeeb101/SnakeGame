@@ -6,10 +6,10 @@ import type { Direction, GameSnapshot } from "../types";
 import { Stat } from "./Stat";
 
 const directionButtons: Array<{ direction: Direction; label: string }> = [
-  { direction: "up", label: "Up" },
-  { direction: "left", label: "Left" },
-  { direction: "right", label: "Right" },
-  { direction: "down", label: "Down" },
+  { direction: "up", label: "↑" },
+  { direction: "left", label: "←" },
+  { direction: "right", label: "→" },
+  { direction: "down", label: "↓" },
 ];
 
 export function GameStage({
